@@ -24,27 +24,32 @@ func main() {
 		}
 		currentRange := strings.FieldsFunc(inputArray[i], f)
 
-		firstInput, errOne := strconv.ParseInt(currentRange[0], 10, 64)
-		secondInput, errTwo := strconv.ParseInt(currentRange[1], 10, 64)
+		firstInput, err := strconv.ParseInt(currentRange[0], 10, 64)
+		if err != nil {
+			fmt.Print("Error")
+		}
+		secondInput, err := strconv.ParseInt(currentRange[1], 10, 64)
+		if err != nil {
+			fmt.Print("Error")
+		}
 
-		if errOne == nil && errTwo == nil {
-			for j := firstInput; j <= secondInput; j++ {
+		for j := firstInput; j <= secondInput; j++ {
 
-				convertedString := strconv.FormatInt(j, 10)
-				length := len(convertedString)
+			convertedString := strconv.FormatInt(j, 10)
+			length := len(convertedString)
 
-				if length > 0 && length%2 == 0 {
+			if length > 0 && length%2 == 0 {
 
-					firstHalf := convertedString[:length/2]
-					secondHalf := convertedString[length/2:]
+				firstHalf := convertedString[:length/2]
+				secondHalf := convertedString[length/2:]
 
-					if firstHalf == secondHalf {
-						fmt.Println("Converted string is : ", convertedString)
-						acc += j
-					}
+				if firstHalf == secondHalf {
+					fmt.Println("Converted string is : ", convertedString)
+					acc += j
 				}
 			}
 		}
+
 	}
 	fmt.Println("Total should be", acc)
 }
